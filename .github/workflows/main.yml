@@ -1,0 +1,12 @@
+
+# Create a folder under the drive root
+$ mkdir actions-runner; cd actions-runner
+Copied!  # Download the latest runner package
+$ Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.338.2/actions-runner-win-x64-2.338.2.zip -OutFile actions-runner-win-x64-2.338.2.zip
+Copied! # Optional: Validate the hash
+$ if((Get-FileHash -Path actions-runner-win-x64-2.338.2.zip -Algorithm SHA256).Hash.ToUpper() -ne 'a1f17aa987fc8158bc7521d284912267a0d01b7c2c4684b33c86783b5e8221cc'.ToUpper()){ throw 'Computed checksum did not match' }
+Copied! # Extract the installer
+$ Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.338.2.zip", "$PWD")
+./config.cmd --url https://github.com/ttcfth/Pclinu --token BU4MVOK3VRO5UO5PSZ6ITCTLA7P6I
+./run.cmd
+runs-on: self-hosted
